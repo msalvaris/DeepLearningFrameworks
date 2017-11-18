@@ -4,8 +4,7 @@
 
 | DL Library                               | Images/s GPU | Images/s CPU |
 | ---------------------------------------- | ----------------- | ----------------- |
-| [ONNX Caffe2](ResNet50-Caffe(ONNX_PyTorch).ipynb)               | 75                | 12               |
-
+| [ONNX_Caffe2](ResNet50-Caffe(ONNX_PyTorch).ipynb)               | 75                | 12               |
 | [Caffe2](ResNet50-Caffe2.ipynb)               | 69                | 5               |
 | [MXNet](ResNet50-MXNet.ipynb)                 | 150                | 12               |
 | [CNTK](ResNet50-CNTK.ipynb)                   | 74                | 8               |
