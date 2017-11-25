@@ -44,12 +44,12 @@ cntk-cnn:
 	$(call execute_notebook, deepc/cntk36, notebooks/CNTK_CNN.ipynb)
 
 keras-tf-cnn:
-	$(call execute_notebook, deepc/tensorflow36, notebooks/Keras_TF_CNN.ipynb)
+	$(call execute_notebook, deepc/keras36, notebooks/Keras_TF_CNN.ipynb)
 
 keras-cntk-cnn:
 	$(call execute_notebook, deepc/keras36, notebooks/Keras_CNTK_CNN.ipynb)
 
 tf-cnn:
-	$(call execute_notebook, deepc/keras36, notebooks/Tensorflow_CNN.ipynb)
+	$(call execute_notebook, deepc/tensorflow36, notebooks/Tensorflow_CNN.ipynb)
 
 .PHONY: help start-notebook run-mxnet-cnn
