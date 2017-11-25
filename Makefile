@@ -38,7 +38,7 @@ chainer-cnn:
 	$(call execute_notebook, deepc/chainer36, notebooks/Chainer_CNN.ipynb)
 
 pytorch-cnn:
-	$(call execute_notebook, deepc/pytorch36, notebooks/Pytorch_CNN.ipynb)
+	$(call execute_notebook, deepc/pytorch36, notebooks/PyTorch_CNN.ipynb)
 
 cntk-cnn:
 	$(call execute_notebook, deepc/cntk36, notebooks/CNTK_CNN.ipynb)
