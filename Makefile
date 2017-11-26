@@ -14,7 +14,7 @@ define execute_notebook
  nvidia-docker run -it \
  -v $(notebooks_dir):/workspace/notebooks \
  $(1) \
- jupyter nbconvert --ExecutePreprocessor.timeout=-1 ExecutePreprocessor.kernel_name="python3" --inplace --to notebook --execute $(2)
+ jupyter nbconvert --ExecutePreprocessor.timeout=-1 --ExecutePreprocessor.kernel_name="python3" --inplace --to notebook --execute $(2)
 endef
 
 help:
