@@ -16,7 +16,7 @@ export PROJECT_HELP_MSG
 NOTEBOOKS_DIR:=$(shell pwd)
 GPU_TYPE:=$(shell nvidia-smi --query-gpu=gpu_name --format=csv,noheader|head -1| cut -d ' ' -f 2|cut -d '-' -f 1)
 
-CNTK_IMAGE:=masalvar/cnkt:p36-cuda9-cudnn7-devel
+CNTK_IMAGE:=masalvar/cntk:p36-cuda9-cudnn7-devel
 PYTORCH_IMAGE:=masalvar/pytorch:p36-cuda9-cudnn7-devel
 KERAS_IMAGE:=masalvar/keras:p36-cuda9-cudnn7-devel
 CHAINER_IMAGE:=masalvar/chainer:p36-cuda9-cudnn7-devel
