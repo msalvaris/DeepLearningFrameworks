@@ -70,7 +70,7 @@ tensorflow_nb:
 
 #------ EXECUTION --------------------------------------------------------
 
-exec_all: chainer_cnn_exec mxnet_cnn_exec gluon_cnn_exec keras_cntk_cnn_exec keras_tf_cnn_exec \
+exec_all: chainer_cnn_exec mxnet_cnn_exec gluon_cnn_exec keras_tf_cnn_exec \
 			pytorch_exec tensorflow_exec
 
 caffe2_cnn_exec:
