@@ -95,7 +95,7 @@ keras_tf_cnn_exec:
 	$(call execute_notebook, $(NOTEBOOKS_DIR), $(KERAS_IMAGE), Keras_TF_CNN)
 
 pytorch_exec:
-	$(call execute_notebook, $(NOTEBOOKS_DIR), $(PYTORCH_IMAGE), Pytorch_CNN)
+	$(call execute_notebook, $(NOTEBOOKS_DIR), $(PYTORCH_IMAGE), PyTorch_CNN)
 
 tensorflow_exec:
 	$(call execute_notebook, $(NOTEBOOKS_DIR), $(PYTORCH_IMAGE), Tensorflow_CNN)
