@@ -1,12 +1,12 @@
-import numpy as np
 import os
-import tarfile
 import pickle
 import subprocess
 import sys
-from sklearn.datasets import fetch_mldata
+import tarfile
+import timeit
+
+import numpy as np
 from sklearn.preprocessing import OneHotEncoder
-from sklearn.model_selection import train_test_split
 
 if sys.version_info.major == 2:
     # Backward compatibility with python 2.
@@ -240,3 +240,12 @@ def imdb_for_library(seq_len=100, max_features=20000, one_hot=False):
     y_train = y_train.astype(np.int32)
     y_test = y_test.astype(np.int32)
     return x_train, x_test, y_train, y_test
+
+class Timer:
+    def __enter__(self):
+        self.start_time = timeit.default_timer()
+        return self
+
+    def __exit__(self, *args):
+        self.end = timeit.default_timer()
+        self.interval = self.end - self.start_time
