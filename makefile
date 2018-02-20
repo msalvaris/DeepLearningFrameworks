@@ -14,14 +14,15 @@ endef
 export PROJECT_HELP_MSG
 
 NOTEBOOKS_DIR:=$(shell pwd)
+GPU_TYPE:='P100'
 
-CNTK_IMAGE:="masalvar/cntk_bait"
-PYTORCH_IMAGE:="masalvar/pytorch_bait"
-KERAS_IMAGE:="masalvar/keras_bait"
-CHAINER_IMAGE="masalvar/chainer_bait"
+CNTK_IMAGE:=""masalvar/cnkt:p36-cuda9-cudnn7-devel"
+PYTORCH_IMAGE:="masalvar/pytorch:p36-cuda9-cudnn7-devel"
+KERAS_IMAGE:="masalvar/keras:p36-cuda9-cudnn7-devel"
+CHAINER_IMAGE="masalvar/chainer:p36-cuda9-cudnn7-devel"
 MXNET_IMAGE="masalvar/mxnet:p36-cuda9-cudnn7-devel"
-CAFFE2_IMAGE="masalvar/caffe2_bait"
-TF_IMAGE="masalvar/tf_bait"
+CAFFE2_IMAGE=""masalvar/caffe2:p36-cuda9-cudnn7-devel"
+TF_IMAGE=""masalvar/tensorflow:p36-cuda9-cudnn7-devel"
 
 define serve_notebbook
  nvidia-docker run -it \
@@ -31,15 +32,40 @@ define serve_notebbook
  jupyter notebook --port=9999 --ip=* --allow-root --no-browser --notebook-dir=/workspace/notebooks
 endef
 
+
+define execute_notebook
+ nvidia-docker run -it \
+ -v $(1):/workspace/notebooks \
+ $(2) \
+ jupyter nbconvert --ExecutePreprocessor.timeout=-1 --to notebook --execute $(3).ipynb --output $(3)_$(GPU_TYPE).ipynb
+endef
+
 help:
 	@echo "$$PROJECT_HELP_MSG" | less
-
 
 mxnet_nb:
 	$(call serve_notebbook, $(NOTEBOOKS_DIR), $(MXNET_IMAGE))
 
 keras_nb:
 	$(call serve_notebbook, $(NOTEBOOKS_DIR), $(KERAS_IMAGE))
+
+cntk_nb:
+	$(call serve_notebbook, $(NOTEBOOKS_DIR), $(CNTK_IMAGE))
+
+pytorch_nb:
+	$(call serve_notebbook, $(NOTEBOOKS_DIR), $(PYTORCH_IMAGE))
+
+chainer_nb:
+	$(call serve_notebbook, $(NOTEBOOKS_DIR), $(CHAINER_IMAGE))
+
+caffe2_nb:
+	$(call serve_notebbook, $(NOTEBOOKS_DIR), $(CAFFE2_IMAGE))
+
+tensorflow_nb:
+	$(call serve_notebbook, $(NOTEBOOKS_DIR), $(TF_IMAGE))
+
+mxnet_cnn_exec:
+	$(call execute_notebook, $(NOTEBOOKS_DIR), $(MXNET_IMAGE), MXNet_CNN)
 
 
 initial-setup: install-az-cli install-blobxfer select-subscription register-azb create-service-principal create-storage create-fileshare set-storage-key transfer-to-fileshare
