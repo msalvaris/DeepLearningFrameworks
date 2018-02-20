@@ -37,7 +37,7 @@ define execute_notebook
  nvidia-docker run -it \
  -v $(1):/workspace/notebooks \
  $(2) \
- cd /workspace/notebooks; jupyter nbconvert --ExecutePreprocessor.timeout=-1 --to notebook --execute $(3).ipynb --output $(3)_$(GPU_TYPE).ipynb
+ /bin/bash -c "cd /workspace/notebooks; jupyter nbconvert --ExecutePreprocessor.timeout=-1 --to notebook --execute $(3).ipynb --output $(3)_$(GPU_TYPE).ipynb"
 endef
 
 help:
