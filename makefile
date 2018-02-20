@@ -14,7 +14,7 @@ endef
 export PROJECT_HELP_MSG
 
 NOTEBOOKS_DIR:=$(shell pwd)
-GPU_TYPE:='P100'
+GPU_TYPE:=P100
 
 CNTK_IMAGE:=""masalvar/cnkt:p36-cuda9-cudnn7-devel"
 PYTORCH_IMAGE:="masalvar/pytorch:p36-cuda9-cudnn7-devel"
@@ -37,7 +37,7 @@ define execute_notebook
  nvidia-docker run -it \
  -v $(1):/workspace/notebooks \
  $(2) \
- jupyter nbconvert --ExecutePreprocessor.timeout=-1 --to notebook --execute $(3).ipynb --output $(3)_$(GPU_TYPE).ipynb
+ cd /workspace/notebooks; jupyter nbconvert --ExecutePreprocessor.timeout=-1 --to notebook --execute $(3).ipynb --output $(3)_$(GPU_TYPE).ipynb
 endef
 
 help:
