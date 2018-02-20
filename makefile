@@ -98,7 +98,7 @@ pytorch_exec:
 	$(call execute_notebook, $(NOTEBOOKS_DIR), $(PYTORCH_IMAGE), PyTorch_CNN)
 
 tensorflow_exec:
-	$(call execute_notebook, $(NOTEBOOKS_DIR), $(PYTORCH_IMAGE), Tensorflow_CNN)
+	$(call execute_notebook, $(NOTEBOOKS_DIR), $(TF_IMAGE), Tensorflow_CNN)
 
 
 .PHONY: help
