@@ -47,7 +47,7 @@ Since we are essentially comparing a series of deterministic mathematical operat
 
     def res(label):
     	if label in results_dict:
-    		'{0: <22}'.format(round(results_dict[label]['training duration'], 1))
+    		'{0: <22}'.format(str(round(results_dict[label]['training duration'], 1)))
     	else:
     		'{0: <22}'.format('')
 
