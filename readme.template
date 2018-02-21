@@ -44,24 +44,31 @@ Since we are essentially comparing a series of deterministic mathematical operat
     from glob import glob
 
     results_dict = {f.split('.')[0]:json.load(open(f)) for f in glob('*.json')}
+
+    def res(label):
+    	if label in results_dict:
+    		return round(results_dict[label]['training duration'], 1)
+    	else:
+    		return ''
+
 %>
 
 ### Training CNN (VGG-style) on CIFAR-10 - Image Recognition
 
 | DL Library                                     | Test Accuracy (%) | Training Time K80 (s) | Training Time M60 (s) | Training Time P40 (s) | Training Time P100 (s) |
 | ---------------------------------------------- | :---------------: | :-------------------: | :-------------------: | :-------------------: | :--------------------: |
-| [MXNet 0.12.0](MXNet_CNN.ipynb)                | 77                | 145                   | 96                    | 57.2                  | ${round(results_dict['mxnet_cnn_P100']['training duration'], 1)}                   |
-| [Caffe2](Caffe2_CNN.ipynb)                     | 79                | 148                   |                       |                       |                        |
-| [Gluon 0.12.0](Gluon_CNN.ipynb)                | 76                | 152                   | 112                   | 71                    | 68                     |
-| [Knet(Julia)](Knet_CNN.ipynb)                  | 78                | 159                   |                       |                       |                        |
-| [Chainer 3.1.0](Chainer_CNN.ipynb)             | 79                | 162                   | 106                   | 145                   | 123                    |
-| [CNTK 2.2](CNTK_CNN.ipynb)                     | 78                | 163                   | 116                   | 60                    | 54.4                   |
-| [PyTorch 0.3](PyTorch_CNN.ipynb)               | 78                | 169                   | 102                   | 56.7                  | 63                     |
-| [Tensorflow 1.4](Tensorflow_CNN.ipynb)         | 78                | 173                   | 115                   | 66                    | 70                     |
-| [Keras 2.1.1(CNTK)](Keras_CNTK_CNN.ipynb)      | 77                | 194                   | 157                   | 79                    | 72                     |
-| [Keras 2.1.1(TF)](Keras_TF_CNN.ipynb)          | 77                | 241                   | 171                   | 100                   | 86                     |
-| [Lasagne 0.2(Theano)](Theano_Lasagne_CNN.ipynb)| 77                | 253                   |                       |                       |                        |
-| [Keras 2.1.1(Theano)](Keras_Theano_CNN.ipynb)  | 78                | 269                   |                       |                       |                        |
+| [MXNet 0.12.0](MXNet_CNN.ipynb)                | 77                | 145                   | 96                    | 57.2                  | ${res('mxnet_cnn_P100')}                   |
+| [Caffe2](Caffe2_CNN.ipynb)                     | 79                | 148                   |                       |                       | ${res('caffe2_cnn_P100')                       |
+| [Gluon 0.12.0](Gluon_CNN.ipynb)                | 76                | 152                   | 112                   | 71                    | ${res('gluon_cnn_P100')                     |
+| [Knet(Julia)](Knet_CNN.ipynb)                  | 78                | 159                   |                       |                       | ${res('knet_cnn_P100')                       |
+| [Chainer 3.1.0](Chainer_CNN.ipynb)             | 79                | 162                   | 106                   | 145                   | ${res('chainer_cnn_P100')                    |
+| [CNTK 2.2](CNTK_CNN.ipynb)                     | 78                | 163                   | 116                   | 60                    | ${res('cntk_cnn_P100')                   |
+| [PyTorch 0.3](PyTorch_CNN.ipynb)               | 78                | 169                   | 102                   | 56.7                  | ${res('pytorch_cnn_P100')                     |
+| [Tensorflow 1.4](Tensorflow_CNN.ipynb)         | 78                | 173                   | 115                   | 66                    | ${res('tensorflow_cnn_P100')                     |
+| [Keras 2.1.1(CNTK)](Keras_CNTK_CNN.ipynb)      | 77                | 194                   | 157                   | 79                    | ${res('keras_cntk_cnn_P100')                     |
+| [Keras 2.1.1(TF)](Keras_TF_CNN.ipynb)          | 77                | 241                   | 171                   | 100                   | ${res('keras_tf_cnn_P100')                     |
+| [Lasagne 0.2(Theano)](Theano_Lasagne_CNN.ipynb)| 77                | 253                   |                       |                       | ${res('lasagne_cnn_P100')                       |
+| [Keras 2.1.1(Theano)](Keras_Theano_CNN.ipynb)  | 78                | 269                   |                       |                       | ${res('keras_theano_cnn_P100')                       |
 
 Input for this model is the standard [CIFAR-10 dataset](http://www.cs.toronto.edu/~kriz/cifar.html) containing 50k training images and 10k test images, uniformly split across 10 classes. Each 32 by 32 px image is supplied as a tensor of shape (3, 32, 32) with pixel intensity re-scaled from 0-255 to 0-1. For example: ![automobile](common/automobile10.PNG) with corresponding y=(0, 1, 0, 0, 0, 0, 0, 0, 0, 0) where labels=[airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck]
 
