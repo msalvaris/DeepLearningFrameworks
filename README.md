@@ -1,16 +1,12 @@
-## Updates
 
-#### 29/1/2018
 
 * Experiments on M60, P40, P100 NVIDIA GPUs.
 
 
-#### 27/11/2017
 
 * Added [feature-extraction example](https://github.com/ilkarman/DeepLearningFrameworks/#inference-resnet-50-feature-extraction)
 * Re-ran all notebooks on latest VM version
 
-## Notes
 
 **The notebooks are not specifically written for speed, instead they aim to create an easy comparison between the frameworks. However, any suggestions on improving the training-time are welcome!**
 
@@ -22,7 +18,6 @@
 
 ![info](common/info.PNG)
 
-## Goal
 
 Create a Rosetta Stone of deep-learning frameworks to allow data-scientists to easily leverage their expertise from one framework to another (by translating, rather than learning from scratch). Also, to make the models more transparent to comparisons in terms of training-time and default-options.
 
@@ -37,28 +32,27 @@ A lot of online tutorials use very-low level APIs, which are very verbose, and d
 
 Since we are essentially comparing a series of deterministic mathematical operations (albeit with a random initialization), it does not make sense to me to compare the accuracy across frameworks and instead they are reported as **checks we want to match**, to make sure we are comparing the same model architecture. 
 
-## Results (24 Nov 2017)
 
-### Training CNN (VGG-style) on CIFAR-10 - Image Recognition
+
+
 
 | DL Library                                     | Test Accuracy (%) | Training Time K80 (s) | Training Time M60 (s) | Training Time P40 (s) | Training Time P100 (s) |
 | ---------------------------------------------- | :---------------: | :-------------------: | :-------------------: | :-------------------: | :--------------------: |
-| [MXNet 0.12.0](MXNet_CNN.ipynb)                | 77                | 145                   | 96                    | 57.2                  | 52.2                   |
-| [Caffe2](Caffe2_CNN.ipynb)                     | 79                | 148                   |                       |                       |                        |
-| [Gluon 0.12.0](Gluon_CNN.ipynb)                | 76                | 152                   | 112                   | 71                    | 68                     |
-| [Knet(Julia)](Knet_CNN.ipynb)                  | 78                | 159                   |                       |                       |                        |
-| [Chainer 3.1.0](Chainer_CNN.ipynb)             | 79                | 162                   | 106                   | 145                   | 123                    |
-| [CNTK 2.2](CNTK_CNN.ipynb)                     | 78                | 163                   | 116                   | 60                    | 54.4                   |
-| [PyTorch 0.3](PyTorch_CNN.ipynb)               | 78                | 169                   | 102                   | 56.7                  | 63                     |
-| [Tensorflow 1.4](Tensorflow_CNN.ipynb)         | 78                | 173                   | 115                   | 66                    | 70                     |
-| [Keras 2.1.1(CNTK)](Keras_CNTK_CNN.ipynb)      | 77                | 194                   | 157                   | 79                    | 72                     |
-| [Keras 2.1.1(TF)](Keras_TF_CNN.ipynb)          | 77                | 241                   | 171                   | 100                   | 86                     |
-| [Lasagne 0.2(Theano)](Theano_Lasagne_CNN.ipynb)| 77                | 253                   |                       |                       |                        |
-| [Keras 2.1.1(Theano)](Keras_Theano_CNN.ipynb)  | 78                | 269                   |                       |                       |                        |
+| [MXNet 0.12.0](MXNet_CNN.ipynb)                | 77                | 152.9                 | 95.0                  | 69.6                  | 52.3                   |
+| [Caffe2](Caffe2_CNN.ipynb)                     | 79                |                       |                       |                       |                        |
+| [Gluon 0.12.0](Gluon_CNN.ipynb)                | 76                | 163.1                 | 104.5                 | 97.8                  | 61.1                   |
+| [Knet(Julia)](Knet_CNN.ipynb)                  | 78                |                       |                       |                       |                        |
+| [Chainer 3.1.0](Chainer_CNN.ipynb)             | 79                | 161.5                 | 104.7                 | 123.8                 | 75.2                   |
+| [CNTK 2.2](CNTK_CNN.ipynb)                     | 78                |                       |                       |                       |                        |
+| [PyTorch 0.3](PyTorch_CNN.ipynb)               | 78                | 162.3                 | 100.5                 | 67.2                  | 53.0                   |
+| [Tensorflow 1.4](Tensorflow_CNN.ipynb)         | 78                | 169.6                 | 105.7                 | 78.4                  | 56.9                   |
+| [Keras 2.1.1(CNTK)](Keras_CNTK_CNN.ipynb)      | 77                |                       |                       |                       |                        |
+| [Keras 2.1.1(TF)](Keras_TF_CNN.ipynb)          | 77                | 243.2                 | 164.5                 | 150.0                 | 88.3                   |
+| [Lasagne 0.2(Theano)](Theano_Lasagne_CNN.ipynb)| 77                |                       |                       |                       |                        |
+| [Keras 2.1.1(Theano)](Keras_Theano_CNN.ipynb)  | 78                |                       |                       |                       |                        |
 
 Input for this model is the standard [CIFAR-10 dataset](http://www.cs.toronto.edu/~kriz/cifar.html) containing 50k training images and 10k test images, uniformly split across 10 classes. Each 32 by 32 px image is supplied as a tensor of shape (3, 32, 32) with pixel intensity re-scaled from 0-255 to 0-1. For example: ![automobile](common/automobile10.PNG) with corresponding y=(0, 1, 0, 0, 0, 0, 0, 0, 0, 0) where labels=[airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck]
 
-### Training RNN (GRU) on IMDB - Natural Language Processing (Sentiment Analysis)
 
 | DL Library                               | Test Accuracy (%) | Training Time K80 (s) | Training Time M60 (s) | Training Time P40 (s) | Training Time P100 (s) | Using CuDNN? |
 | ---------------------------------------- | :---------------: | :-------------------: | :-------------------: | :-------------------: | :--------------------: | :----------: |
@@ -78,7 +72,6 @@ Where possible I try to use the cudnn-optimised RNN (noted by the CUDNN=True swi
 
 The classification model creates an embedding matrix of size (150x125) and then applies 100 gated recurrent units and takes as output the final output (not sequence of outputs and not hidden state). Any suggestions on alterations to this are welcome.
 
-### Inference ResNet-50 (Feature Extraction)
 
 | DL Library                                          | Images/s GPU      | Images/s CPU      |
 | ----------------------------------------            | ----------------- | ----------------- |
@@ -97,9 +90,7 @@ The classification model creates an embedding matrix of size (150x125) and then 
 
 A pre-trained ResNet50 model is loaded and chopped just after the avg_pooling at the end (7, 7), which outputs a 2048D dimensional vector. This can be plugged into a softmax layer or another classifier such as a boosted tree to perform transfer learning. Allowing for a warm start; this forward-only pass to the avg_pool layer is timed on both CPU and GPU.
 
-### Lessons Learned
 
-#### CNN
 
 The below offers some insights I gained after trying to match test-accuracy across frameworks and from all the GitHub issues/PRs raised.
 
@@ -153,10 +144,9 @@ The below offers some insights I gained after trying to match test-accuracy acro
    make install
    ```
 
-#### RNN
 
 1. There are multiple RNN implementations/kernels available for most frameworks (for example [Tensorflow](http://returnn.readthedocs.io/en/latest/tf_lstm_benchmark.html)); once reduced down to the cudnnLSTM/GRU level the execution is the fastest, however this implementation is less flexible (e.g. maybe you want layer normalisation) and may become problematic if inference is run on the CPU at a later stage. At the cudDNN level most of the frameworks' runtimes are very similar. [This](https://devblogs.nvidia.com/parallelforall/optimizing-recurrent-neural-networks-cudnn-5/) Nvidia blog-post goes through several interesting cuDNN optimisations for recurrent neural nets e.g. fusing - "combining the computation of many small matrices into that of larger ones and streaming the computation whenever possible, the ratio of computation to memory I/O can be increased, which results in better performance on GPU".
 
-#### Inference
 
 Comming soon
+
