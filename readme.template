@@ -44,7 +44,7 @@ Since we are essentially comparing a series of deterministic mathematical operat
     from glob import glob
     from os import path
 
-    results_dict = {f.split('.')[0]:json.load(open(f)) for f in glob(path.join('results','*.json'))}
+    results_dict = {path.basename(f).split('.')[0]:json.load(open(f)) for f in glob(path.join('results','*.json'))}
 
     def res(label):
     	if label in results_dict:
